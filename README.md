@@ -1,6 +1,6 @@
-# SdProject
+# ProjectSD1
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.18.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.19.
 
 ## Development server
 
