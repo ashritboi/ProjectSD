@@ -8,7 +8,7 @@ import { LoginAdvisorComponent } from './login-advisor/login-advisor.component';
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path:'advisorlogin', component:LoginAdvisorComponent},
-  {path:'serverscomponent', component:ServersComponent}
+  {path:'', component:ServersComponent}
 ];
 
 @NgModule({
