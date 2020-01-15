@@ -13,10 +13,10 @@
           Password:<br>
           <input type="password" placeholder="Enter Password" name="password">
         </form>
-        <button type="submit">Login</button>
-        <button *ngIf = "!user" (click)="loginGoogle()">Login with google</button>
-      
-        <button *ngIf = "user" (click)="logout()">Logout from google</button>
+        <button type="submit" >Login</button>
+        
 
+        <button (click)="register()">Register</button>
+    
     </div>
 

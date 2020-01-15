@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../login.service';
-
+import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -8,26 +8,21 @@ import { LoginService } from '../login.service';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit{
-user: firebase.User;
+    authError: any;
 
-    constructor(
-        private service:LoginService
-    ) { }
-
+    constructor(private auth: AuthService, private router:Router) { }
+  
     ngOnInit() {
-        this.service.getLoggedInUser()
-        .subscribe(user =>{
-            console.log(user);
-            this.user=user;
-        });
+      this.auth.eventAuthError$.subscribe( data => {
+        this.authError = data;
+      });
     }
-
-    loginGoogle(){
-        console.log('Login...');
-        this.service.login();
+  
+    login(frm) {
+      this.auth.login(frm.value.email, frm.value.password);
     }
+    register(){
+      this.router.navigate(['/signup']);
 
-    logout(){
-        this.service.logout();
     }
 }

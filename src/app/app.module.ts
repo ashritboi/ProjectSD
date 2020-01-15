@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
+import { NgModule} from '@angular/core';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -9,6 +8,12 @@ import { AppComponent } from './app.component';
 import {environment} from '../environments/environment';
 import { SignupComponent } from './signup/signup.component';
 import { MembersComponent } from './members/members.component';
+import { SPageComponent } from './student/s-page/s-page.component';
+import { APageComponent } from './advisor/a-page/a-page.component';
+import { FormsModule } from '@angular/forms';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
+
 export const firebaseConfig = {
   apiKey: "AIzaSyAnM-6Sg7Sqg7lQcfQtYEq3NOS-prYQwf4",
     authDomain: "seniordesign-1a0fc.firebaseapp.com",
@@ -25,16 +30,21 @@ export const firebaseConfig = {
     AppComponent,
     routingComponents,
     SignupComponent,
-    MembersComponent
-  ],
+    MembersComponent,
+    SPageComponent,
+    APageComponent,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
-  ],
+    AngularFireAuthModule,
+    FormsModule,
+    AngularFirestoreModule
+    ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }
