@@ -1,1 +1,12 @@
-<p>student page works!</p>
+
+
+
+<div class="topnav">
+   
+    <a class="active" href="login">Home</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
+  </div>
+
+  <p *ngIf="user">HI {{ user?.displayName }}</p>

@@ -12,7 +12,7 @@ import { SPageComponent } from './student/s-page/s-page.component';
 import { APageComponent } from './advisor/a-page/a-page.component';
 import { FormsModule } from '@angular/forms';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-
+import {AuthService} from './auth/auth.service';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAnM-6Sg7Sqg7lQcfQtYEq3NOS-prYQwf4",
@@ -43,7 +43,7 @@ export const firebaseConfig = {
     FormsModule,
     AngularFirestoreModule
     ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 
 })

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-s-page',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./s-page.component.css']
 })
 export class SPageComponent implements OnInit {
-
-  constructor() { }
+  user: firebase.User;
+  constructor(private auth: AuthService) { }
 
   ngOnInit() {
+    this.auth.getUserState()
+      .subscribe( user => {
+        this.user = user;
+      })
+  }
+  logout() {
+    this.auth.logout();
   }
 
 }

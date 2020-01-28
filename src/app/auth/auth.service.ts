@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { ThrowStmt } from '@angular/compiler';
 import { BehaviorSubject } from 'rxjs';
+import {Observable} from 'rxjs';
 
 
 @Injectable({
@@ -31,7 +32,7 @@ export class AuthService {
       })
       .then(userCredential => {
         if(userCredential) {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/studentpage']);
         }
       })
   }
@@ -45,15 +46,18 @@ export class AuthService {
         userCredential.user.updateProfile( {
           displayName: user.firstName + ' ' + user.lastName
         });
+        //this.router.navigate(['/login']);
 
         this.insertUserData(userCredential)
           .then(() => {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/login']);
           });
       })
+      
       .catch( error => {
         this.eventAuthError.next(error);
       });
+
   }
 
   insertUserData(userCredential: firebase.auth.UserCredential) {
@@ -61,9 +65,9 @@ export class AuthService {
       email: this.newUser.email,
       firstname: this.newUser.firstName,
       lastname: this.newUser.lastName,
-      role: 'network user'
+      role: 'Student'
     })
-  }
+  }  
 
   logout() {
     return this.afAuth.auth.signOut();

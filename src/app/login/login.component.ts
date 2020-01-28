@@ -10,17 +10,19 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit{
     authError: any;
 
-    constructor(private auth: AuthService, private router:Router) { }
-  
-    ngOnInit() {
-      this.auth.eventAuthError$.subscribe( data => {
-        this.authError = data;
-      });
-    }
-  
-    login(frm) {
-      this.auth.login(frm.value.email, frm.value.password);
-    }
+
+  constructor(private auth: AuthService, private router: Router) { }
+
+  ngOnInit() {
+    this.auth.eventAuthError$.subscribe( data => {
+      this.authError = data;
+    });
+  }
+
+  login(frm) {
+    this.auth.login(frm.value.email, frm.value.password);
+  }
+
     register(){
       this.router.navigate(['/signup']);
 
