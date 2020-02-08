@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-s-page',
@@ -8,7 +9,7 @@ import {AuthService} from '../../auth/auth.service';
 })
 export class SPageComponent implements OnInit {
   user: firebase.User;
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.auth.getUserState()
@@ -16,8 +17,8 @@ export class SPageComponent implements OnInit {
         this.user = user;
       })
   }
-  logout() {
-    this.auth.logout();
-  }
-
+  logout(){
+    return this.auth.logout().then(() =>{
+      this.router.navigate(['login']);
+  });}
 }

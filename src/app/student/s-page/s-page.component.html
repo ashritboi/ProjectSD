@@ -1,13 +1,17 @@
-
-
-
-<div class="topnav">
-   
-    <a class="active" href="login">Home</a>
-    <a href="#news">Classes</a>
-    <a href="#">Advising</a>
-    <a href="#info">About</a>
-    <a href="#login">Sign Out</a>
+<nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+  <div class="container">
+      <a class="navbar-brand">Angular Router</a>
+      <ul class="nav navbar-nav" routerLinkActive="active">
+          <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="about">About</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="courses">Courses</a></li>
+      </ul>
   </div>
+</nav>
+
+<div class="formGroup">
+  <input type="button" class="btn btnPrimary" value="Log Out" (click)="logout()">
+</div>
+
 
   <p *ngIf="user">HI {{ user?.displayName }}</p>
