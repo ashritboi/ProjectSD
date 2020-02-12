@@ -48,13 +48,15 @@ import { SecureInnerPagesGuard } from "./shared/guard/secure-inner-pages.guard.t
 
 const routes: Routes = [
   {path: 'home', component: ServersComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'advisorlogin', component: LoginAdvisorComponent},
-  {path:'advisorpage', component:APageComponent},
-  {path:'studentpage', component:SPageComponent, canActivate: [AuthGuard]},
+  {path: 'login', component: LoginComponent, canActivate: [SecureInnerPagesGuard]},
+  {path: 'advisorlogin', component: LoginAdvisorComponent, canActivate: [SecureInnerPagesGuard]},
+  {path:'advisorpage', component:APageComponent, canActivate: [SecureInnerPagesGuard]},
+  {path:'studentpage', component:SPageComponent, canActivate: [SecureInnerPagesGuard]},
   {path:'', redirectTo: '/home', pathMatch: 'full'},
-  {path: 'signup', component:SignupComponent},
-  {path: 'forgotpassword', component: ForgotPasswordComponent, canActivate: [SecureInnerPagesGuard] }];
+  {path: 'signup', component:SignupComponent, canActivate: [SecureInnerPagesGuard]},
+  {path: 'forgotpassword', component: ForgotPasswordComponent, canActivate: [AuthGuard] },
+  { path: 'verifyemail', component: VerifyEmailComponent, canActivate: [AuthGuard] }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

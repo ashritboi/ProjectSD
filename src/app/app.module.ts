@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule} from '@angular/core';
 import {AngularFireModule} from '@angular/fire';
-import {AngularFireDatabaseModule, AngularFireDatabase} from '@angular/fire/database';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,7 +11,7 @@ import { MembersComponent } from './members/members.component';
 import { SPageComponent } from './student/s-page/s-page.component';
 import { APageComponent } from './advisor/a-page/a-page.component';
 import { FormsModule } from '@angular/forms';
-import { AngularFirestoreModule, AngularFirestoreDocument, AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import {AuthService} from './auth/auth.service';
 
 export const firebaseConfig = {
@@ -41,11 +41,7 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     FormsModule,
-    AngularFirestoreModule,
-    AngularFirestoreDocument,
-    AngularFirestore,
-    AngularFireDatabase,
-    AngularFirestoreCollection
+    AngularFirestoreModule
     ],
   providers: [AuthService],
   bootstrap: [AppComponent],

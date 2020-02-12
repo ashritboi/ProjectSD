@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-advisor',
@@ -9,20 +7,9 @@ import { Router } from '@angular/router';
 })
 export class LoginAdvisorComponent implements OnInit {
 
-  authError: any;
-
-
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
-    this.auth.eventAuthError$.subscribe( data => {
-      this.authError = data;
-    });
   }
 
-  login(frm) {
-    this.auth.login(frm.value.email, frm.value.password, "Advisor");
-  }
-
-   
 }

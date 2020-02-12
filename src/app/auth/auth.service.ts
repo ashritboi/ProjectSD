@@ -1,39 +1,29 @@
-import { Injectable, NgZone, OnInit } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { ThrowStmt } from '@angular/compiler';
 import { BehaviorSubject } from 'rxjs';
-import * as firebase from 'firebase'
-import { AngularFireDatabase } from '@angular/fire/database';
-import { Observable } from 'rxjs';
-import {  AngularFireList } from '@angular/fire/database';
-
+import {Observable} from 'rxjs';
+import {User} from '../shared/services/user'
+import {auth} from 'firebase/app'
 
 
 @Injectable({
   providedIn: 'root'
 })
-
-export class AuthService  {
-  
+export class AuthService {
   private eventAuthError = new BehaviorSubject<string>("");
   eventAuthError$ = this.eventAuthError.asObservable();
+
   newUser: any;
-  u1: any;
 
   constructor(
     public afs: AngularFirestore,
     public afAuth: AngularFireAuth,
     public db: AngularFirestore,
-    public dbf: AngularFireDatabase,
     public ngZone: NgZone,
     public router: Router) {
-
-      dbf.list('/Users').valueChanges()
-        .subscribe(u1 => {
-        this.u1 = u1;
-        console.log("made" + u1);
-      })
      
     }
      
@@ -42,9 +32,11 @@ export class AuthService  {
         email: this.newUser.email,
         firstname: this.newUser.firstName,
         lastname: this.newUser.lastName,
-        role: "student" 
+        role: 'Student'
+        
+
       })
-    }   
+    }  
 
   getUserState()  {
     return this.afAuth.authState;
@@ -54,24 +46,17 @@ export class AuthService  {
     return ( this.afAuth.authState!== null ) ? true : false;
 
   }
-
-  login( email: string, password: string, role: string) {
+  
+  
+  
+  login( email: string, password: string) {
     this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .catch(error => {
         this.eventAuthError.next(error);
       })
-      
       .then(userCredential => {
-        if(userCredential) {  
-
-          if(role == "Advisor"){
-            this.router.navigate(['/advisorpage']);
-          }
-          if(role == "Student"){
-            this.router.navigate(['/studentpage']);
-          }
-          console.log(role + "this is role");
-
+        if(userCredential) {
+          this.router.navigate(['/studentpage']);
         }
       })
   }
@@ -85,8 +70,8 @@ export class AuthService  {
         console.log(userCredential);
         userCredential.user.updateProfile( {
           displayName: user.firstName + ' ' + user.lastName,
-          
         });
+        
         //this.router.navigate(['/login']);
 
         this.insertUserData(userCredential)
@@ -105,7 +90,7 @@ export class AuthService  {
   SendVerificationMail() {
     return this.afAuth.auth.currentUser.sendEmailVerification()
     .then(() => {
-      this.router.navigate(['login']);
+      this.router.navigate(['verifyemail']);
     })
   }
 
